@@ -11,7 +11,8 @@
 %================================================
 clear;
 
-
+ a = 1;
+ 
 
 addpath obsmutoolsfornewermatlabversions -END % required for some new MATLAB versions
 
