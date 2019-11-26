@@ -27,8 +27,8 @@ xa4=6*0.3048;
 xa5=7*0.3048;
 xa6=15*0.3048;
 disp(sprintf('xa: %f', xa));
-altitude = 15000; %input('Enter the altitude for the simulation (ft)  :  ');
-velocity = 500; %input('Enter the velocity for the simulation (ft/s):  ');
+altitude = 10000; %input('Enter the altitude for the simulation (ft)  :  ');
+velocity = 900; %input('Enter the velocity for the simulation (ft/s):  ');
 
 %% Initial guess for trim
 %%
@@ -373,11 +373,11 @@ sys_ac_lat = pck(A_ac_lat, B_ac_lat, C_ac_lat, D_ac_lat);
 long_poles_ac = spoles(sys_ac_long);
 lat_poles_ac = spoles(sys_ac_lat);
 
-%figure(4); 
-%pzmap(SS_ac_long, 'r', SS_ac_lat, 'b');
-%title_string = sprintf('Altitude = %.2f ft Velocity = %.2f ft/s\nAll Poles\n Blue = lateral Red = longitudinal.', altitude, velocity);
-%title(title_string);
-%sgrid;
+figure(4); 
+pzmap(SS_ac_long, 'r', SS_ac_lat, 'b');
+title_string = sprintf('Altitude = %.2f ft Velocity = %.2f ft/s\nAll Poles\n Blue = lateral Red = longitudinal.', altitude, velocity);
+title(title_string);
+sgrid;
 
 %% Periodic Inherent motion characteristics 
 %%
@@ -399,34 +399,46 @@ freq_dutch_roll = freq_lat(3);
 damp_dutch_roll = damp_lat(3);
 T_half_dutch_roll = log(2)/(freq_dutch_roll * damp_dutch_roll);
 
-
 dt = 0.01;
-t = [1:dt:10];
+t = [1:dt:30];
 y_long = step(SS_ac_long,t);
+u_aileron = [ones(size(t))];
 y_lat = step(SS_ac_lat,t);
 
 %%
-% plot phugoid
-figure; 
-%plot(t,y_long(:,[1 3 4],1))
-
-% plot short period
-figure; 
-%plot(t,y_long(:,[2 3 4],2))
-%plot dutch roll
-figure;
-%plot(t,y_lat(:,[3 4],1))
+% % plot phugoid
+% figure; 
+% plot(t,y_long(:,[1 3 4]))
+% legend("speed","pitch angle","pitch rate")
+% grid on
+% 
+% % plot short period
+% figure; 
+% plot(t,y_long(:,[2 3 4]))
+% legend("aoa","pitch angle","pitch rate")
+% grid on
+% 
+% %plot dutch roll
+% figure;
+% plot(t,y_lat(:,[3 4],1))
+% legend("roll rate","yaw rate")
+% grid on
 
 %% Aperiodic Inherent motion characteristics 
 %%
-
-time_const_spiral = - 1 / poles_lat(1);
-time_const_ap_roll = -1 / poles_lat(2);
-
-%plot spiral
-figure;
-%plot(t,y_lat(:,[2 4],2))
-% plot aperiodic roll
-figure;
-%plot(t,y_lat(:,[2 3],3))
+% 
+% time_const_spiral = - 1 / poles_lat(1);
+% time_const_ap_roll = - 1 / poles_lat(2);
+% 
+% %plot spiral
+% figure;
+% plot(t,y_lat(:,[2 4],2))
+% legend("roll angle","yaw rate")
+% grid on
+% 
+% % plot aperiodic roll
+% figure;
+% plot(t,y_lat(:,[2 3],1))
+% legend("roll angle","roll rate")
+% grid on
 
