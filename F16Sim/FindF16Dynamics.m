@@ -353,6 +353,7 @@ B_ac_long = A_longitude_lo([3 4 2 5], [7]);
 C_ac_long = C_longitude_lo([3 4 2 5], [3 4 2 5]);
 D_ac_long = D_longitude_lo([3 4 2 5], [2]);
 
+
 %Lateral Matrices
 
 A_ac_lat = A_lateral_lo([4 1 5 6], [4 1 5 6]);
@@ -400,7 +401,7 @@ damp_dutch_roll = damp_lat(3);
 T_half_dutch_roll = log(2)/(freq_dutch_roll * damp_dutch_roll);
 
 dt = 0.01;
-t = [1:dt:30];
+t = [0:dt:30];
 y_long = step(SS_ac_long,t);
 u_aileron = [ones(size(t))];
 y_lat = step(SS_ac_lat,t);
@@ -412,11 +413,11 @@ y_lat = step(SS_ac_lat,t);
 % legend("speed","pitch angle","pitch rate")
 % grid on
 % 
-% % plot short period
-% figure; 
-% plot(t,y_long(:,[2 3 4]))
-% legend("aoa","pitch angle","pitch rate")
-% grid on
+% plot short period
+figure(6); 
+plot(t,y_long(:,[2 4]))
+legend("aoa","pitch rate")
+grid on
 % 
 % %plot dutch roll
 % figure;
@@ -442,3 +443,18 @@ y_lat = step(SS_ac_lat,t);
 % legend("roll angle","roll rate")
 % grid on
 
+%%
+
+A_shortp = A_ac_long([2 4], [2 4]);
+B_shortp = B_ac_long([2 4], [1]);
+C_shortp = C_ac_long([2 4], [2 4]);
+D_shortp = D_ac_long([2 4], [1]);
+
+SS_shortp=ss(A_shortp,B_shortp,C_shortp,D_shortp);
+y=step(SS_shortp,t);
+figure(5)
+plot(t,y);
+legend("aoa","pitch rate");
+grid on
+
+q_de=tf(SS_shortp(2,1))
