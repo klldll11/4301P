@@ -343,7 +343,7 @@ G4= (-0.007167*s^9 - 2.131*s^8 - 28.07*s^7 - 80.43*s^6 - 233.5*s^5 - 359.6*s^4 -
 G5 = (-0.07853*s^9 - 2.374*s^8 - 28.84*s^7 - 82*s^6 - 234.2*s^5 - 359.6*s^4 - 2.766*s^3 + 0.034*s^2 + 0.0002239*s - 6.734e-16)/(s^10 + 24.5*s^9 + 102.2*s^8 + 344.8*s^7 + 765.8*s^6 + 915.2*s^5 + 685.6*s^4 + 19.19*s^3 + 4.86*s^2 + 0.05328*s - 4.078e-15);
 G6 = (-0.6494*s^9 - 4.318*s^8 - 34.98*s^7 - 94.55*s^6 - 240.3*s^5 - 359.7*s^4 - 2.767*s^3 + 0.034*s^2 + 0.0002239*s - 6.728e-16)/(s^10 + 24.5*s^9 + 102.2*s^8 + 344.8*s^7 + 765.8*s^6 + 915.2*s^5 + 685.6*s^4 + 19.19*s^3 + 4.86*s^2 + 0.05328*s - 4.078e-15);
 
-%%%%%%%%%%%%%%%% CHAPTER 6 %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% CHAPTER 6 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Longitudinal Matrices
 
@@ -362,4 +362,71 @@ C_ac_lat = C_lateral_lo([4 1 5 6], [4 1 5 6]);
 D_ac_lat = D_lateral_lo([4 1 5 6], [2 3]);
 
 
+%% State space system
+
+SS_ac_long = ss(A_ac_long, B_ac_long, C_ac_long, D_ac_long);
+sys_ac_long = pck(A_ac_long, B_ac_long, C_ac_long, D_ac_long);
+
+SS_ac_lat = ss(A_ac_lat, B_ac_lat, C_ac_lat, D_ac_lat);
+sys_ac_lat = pck(A_ac_lat, B_ac_lat, C_ac_lat, D_ac_lat);
+
+long_poles_ac = spoles(sys_ac_long);
+lat_poles_ac = spoles(sys_ac_lat);
+
+%figure(4); 
+%pzmap(SS_ac_long, 'r', SS_ac_lat, 'b');
+%title_string = sprintf('Altitude = %.2f ft Velocity = %.2f ft/s\nAll Poles\n Blue = lateral Red = longitudinal.', altitude, velocity);
+%title(title_string);
+%sgrid;
+
+%% Periodic Inherent motion characteristics 
+%%
+
+[freq_long,damp_long] = damp(SS_ac_long);
+[freq_lat,damp_lat,poles_lat] = damp(SS_ac_lat);
+
+freq_phugoid = freq_long(1);
+damp_phugoid = damp_long(1);
+T_phugoid = 2*pi / (freq_phugoid * sqrt(1 - damp_phugoid^2));
+T_half_phugoid = log(2)/(freq_phugoid * damp_phugoid);
+
+freq_short_period = freq_long(3);
+damp_short_period = damp_long(3);
+T_short_period = 2*pi / (freq_short_period * sqrt(1 - damp_short_period^2));
+T_half_short_period = log(2)/(freq_short_period * damp_short_period);
+
+freq_dutch_roll = freq_lat(3);
+damp_dutch_roll = damp_lat(3);
+T_half_dutch_roll = log(2)/(freq_dutch_roll * damp_dutch_roll);
+
+
+dt = 0.01;
+t = [1:dt:10];
+y_long = step(SS_ac_long,t);
+y_lat = step(SS_ac_lat,t);
+
+%%
+% plot phugoid
+figure; 
+%plot(t,y_long(:,[1 3 4],1))
+
+% plot short period
+figure; 
+%plot(t,y_long(:,[2 3 4],2))
+%plot dutch roll
+figure;
+%plot(t,y_lat(:,[3 4],1))
+
+%% Aperiodic Inherent motion characteristics 
+%%
+
+time_const_spiral = - 1 / poles_lat(1);
+time_const_ap_roll = -1 / poles_lat(2);
+
+%plot spiral
+figure;
+%plot(t,y_lat(:,[2 4],2))
+% plot aperiodic roll
+figure;
+%plot(t,y_lat(:,[2 3],3))
 
