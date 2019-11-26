@@ -39,12 +39,13 @@ phi = 0; psi = 0;
 p = 0; q = 0; r = 0;
 phi_weight = 10; theta_weight = 10; psi_weight = 10;
 
-disp('At what flight condition would you like to trim the F-16?');
-disp('1.  Steady Wings-Level Flight.');
-disp('2.  Steady Turning Flight.');
-disp('3.  Steady Pull-Up Flight.');
-disp('4.  Steady Roll Flight.');
-FC_flag = input('Your Selection:  ');
+% disp('At what flight condition would you like to trim the F-16?');
+% disp('1.  Steady Wings-Level Flight.');
+% disp('2.  Steady Turning Flight.');
+% disp('3.  Steady Pull-Up Flight.');
+% disp('4.  Steady Roll Flight.');
+% FC_flag = input('Your Selection:  ');
+FC_flag = 1;
 
 switch FC_flag
     case 1
