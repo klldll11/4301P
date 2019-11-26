@@ -452,9 +452,33 @@ D_shortp = D_ac_long([2 4], [1]);
 
 SS_shortp=ss(A_shortp,B_shortp,C_shortp,D_shortp);
 y=step(SS_shortp,t);
-figure(5)
-plot(t,y);
-legend("aoa","pitch rate");
-grid on
+% figure(5)
+% plot(t,y);
+% legend("aoa","pitch rate");
+% grid on
 
-q_de=tf(SS_shortp(2,1))
+H_q_de = tf(SS_shortp(2,1));
+[num_q_de,den_q_de] = tfdata(SS_shortp(2,1));
+num_q_de = cell2mat(num_q_de); 
+den_q_de = cell2mat(den_q_de);
+
+H_alpha_de = tf(SS_shortp(1,1));
+
+% open loop properties
+k_q = num_q_de(3);
+T_theta2 = num_q_de(2)/k_q;
+freq_shortp = (den_q_de(3))^0.5;
+damp_shortp = den_q_de(2) / (2 * freq_shortp);
+g = 9.80665;
+CAP = g * freq_shortp^2 * T_theta2 / (velocity * 0.3048);
+
+K_q = 0.11978;
+H_q_de_cl = feedback(H_q_de, K_q)
+
+K_alpha = 1;
+H_alpha_de_cl = feedback(H_alpha_de, K_alpha);
+
+CAP_rq = g * 0.03 / 0.75;
+damp_shortp_rq = 0.5;
+%freq_shortp_rq = 0.03 * velocity * 0.3048;
+
