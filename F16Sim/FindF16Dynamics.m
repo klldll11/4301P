@@ -595,7 +595,10 @@ altitude = 5000; %input('Enter the altitude for the simulation (ft)  :  ');
 velocity = 300; %input('Enter the velocity for the simulation (ft/s):  ');
 
 A_gs = A_longitude_lo([1 3 4 2 5], [1 3 4 2 5]);
-B_gs = B_longitude_lo([1 3 4 2 5], [1]);
+B_gs = A_longitude_lo([1 3 4 2 5], [6, 7]);
 C_gs = C_longitude_lo([1 3 4 2 5], [1 3 4 2 5]);
 D_gs = D_longitude_lo([1 3 4 2 5], [1]);
+
+init_cond = [altitude, velocity, 0, 0 ,0];
+
 
