@@ -337,6 +337,7 @@ C_gs = C_longitude_lo([1 3 4 2 5], [1 3 4 2 5]);
 D_gs = D_longitude_lo([1 3 4 2 5], [1, 2]);
 
 hdot = -5*pi;
+t = 2000/(5*pi);
 
 %Assuming initial guess for trim, q=0 and theta=0
 init_cond = [altitude, velocity, alpha, 0 ,0];
