@@ -443,7 +443,7 @@ grid on
 % legend("roll angle","roll rate")
 % grid on
 
-%%
+%%  QUESTION 7
 
 A_shortp = A_ac_long([2 4], [2 4]);
 B_shortp = B_ac_long([2 4], [1]);
@@ -589,4 +589,13 @@ set(gca,'FontSize',15);
 
 
 
-%% 
+%% CHAPTER 8
+
+altitude = 5000; %input('Enter the altitude for the simulation (ft)  :  ');
+velocity = 300; %input('Enter the velocity for the simulation (ft/s):  ');
+
+A_gs = A_longitude_lo([1 3 4 2 5], [1 3 4 2 5]);
+B_gs = B_longitude_lo([1 3 4 2 5], [1]);
+C_gs = C_longitude_lo([1 3 4 2 5], [1 3 4 2 5]);
+D_gs = D_longitude_lo([1 3 4 2 5], [1]);
+
