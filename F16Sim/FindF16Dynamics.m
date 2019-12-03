@@ -450,20 +450,13 @@ B_shortp = B_ac_long([2 4], [1]);
 C_shortp = C_ac_long([2 4], [2 4]);
 D_shortp = D_ac_long([2 4], [1]);
 
-SS_shortp=ss(A_shortp,B_shortp,C_shortp,D_shortp);
-y=step(SS_shortp,t);
-% figure(5)
-% plot(t,y);
-% legend("aoa","pitch rate");
-% grid on
+SS_shortp = (1)*ss(A_shortp,B_shortp,C_shortp,D_shortp);
 
-H_shortp = tf(SS_shortp);
-H_q_de = H_shortp(2);
-[num_q_de,den_q_de] = tfdata(SS_shortp(2,1));
+H_q_de = tf(SS_shortp(2));
+[num_q_de,den_q_de] = tfdata(H_q_de);
 num_q_de = cell2mat(num_q_de);
 den_q_de = cell2mat(den_q_de);
-
-H_aa_de = tf(SS_shortp(1,1));
+H_shortp = [H_q_de; H_q_de/s];
 
 % open loop current properties
 k_q = num_q_de(3); %Assumed to be constant
@@ -472,7 +465,6 @@ freq_shortp = (den_q_de(3))^0.5;
 damp_shortp = den_q_de(2) / (2 * freq_shortp);
 g = 9.80665;
 CAP = g * freq_shortp^2 * T_tt2 / (velocity * 0.3048);
-
 
 % required parameters (rq)
 CAP_rq = g * 0.03 / 0.75;
@@ -492,15 +484,11 @@ K_ackermann = [0 1] * C_m^(-1)*p_alfa;
 A_ackermann = A_shortp-B_shortp*K_ackermann;
 sys_shortp_cl = ss(A_ackermann, B_shortp,C_shortp,D_shortp);
 
-%damp(sys_shortp_cl);
-
 lead_lag=(k_q*(1+T_tt2_rq * s))/(num_q_de(3)+num_q_de(2)*s);
 H_q_de_cl = minreal(tf(sys_shortp_cl(2)) * lead_lag);
 H_aa_de_cl = minreal(tf(sys_shortp_cl(1)) * lead_lag);
 
 H_shortp_cl = [H_q_de_cl; H_q_de_cl/s];
-
-%% Close Loop Performance Evaluation
 [num_q_de_cl,den_q_de_cl] = tfdata(H_q_de_cl);
 
 num_q_de_cl = cell2mat(num_q_de_cl);
@@ -514,7 +502,6 @@ CAP_cl = g * freq_shortp_cl^2 * T_tt2_cl / (velocity * 0.3048);
 dt = 0.01;
 t = [0:dt:30];
 u_step_10s = [ones(1,10/dt+1) zeros(1,(30-10)/dt)];
-
 y=lsim(-H_shortp_cl,u_step_10s,t);  %Explain why negative
 
 figure(7);
@@ -530,12 +517,12 @@ ylabel('[\circ] and [\circ/s]');
 title('Input and Short period response','FontWeight','Normal')
 set(gca,'FontSize',15)
 
-%% CAP CHANGE TO CAT. B
+%% CAP
 figure(8);
-patch([0.3 0.3 1.5 1.5 0.3],[0.28 3.6 3.6 0.28 0.28],[0.9100    0.200    0.1700],'FaceAlpha',0.2)
+patch([0.3 0.3 2 2 0.3],[0.085 3.6 3.6 0.085 0.085],[0.9100    0.200    0.1700],'FaceAlpha',0.2)
 hold on
-patch([0.25 0.25 2 2 0.25],[0.16 10 10 0.16 0.16],[0.9290, 0.640, 0.1250],'FaceAlpha',0.2)
-patch([0.125 0.125 10 10 0.125],[0.01 10 10 0.01 0.01],[1,1,0.3],'FaceAlpha',0.2)
+patch([0.2 0.2 2 2 0.25],[0.038 10 10 0.038 0.038],[0.9290, 0.640, 0.1250],'FaceAlpha',0.2)
+patch([0.15 0.15 10 10 0.15],[0.01 10 10 0.01 0.01],[1,1,0.3],'FaceAlpha',0.2)
 %xline(0.125,'linewidth',2);
 plot(damp_shortp_cl,CAP_cl,'r*','linewidth',2) 
 ylim([0.01 10])
@@ -543,7 +530,7 @@ xlim([0.1 10])
 grid on
 xlabel('\zeta_{sp} [-]');
 ylabel('CAP [1/gs^2]');
-legend('level 1 cat. A','level 2 cat. A','level 3 cat. A','current parameter value','Location','Southeast')
+legend('level 1 cat. B','level 2 cat. B','level 3 cat. B','current parameter value','Location','Southeast')
 title('Control Anticipation Parameter versus \zeta_{sp}','FontWeight','Normal')
 set(gca, 'XScale', 'log', 'YScale','log','FontSize',15)
 
@@ -567,35 +554,28 @@ set(gca,'FontSize',15)
 
 
 %% GIBSON RATE CRITERION
-[G_Wcp,P_Wcp,Wcg,Wcp] = margin(-H_q_de); %Change TF to cl
-[G_2Wcp,P_2Wcp] = bode(-H_q_de,2*Wcp);
-phase_rate = -(P_2Wcp-P_Wcp)/(Wcp);
+[GM,PM,Wc_GM,Wc_PM] = margin(H_shortp_cl(2)); 
+[G_Wc_PM,P_Wc_PM] = bode(H_shortp_cl(2),Wc_PM);
+[G_Wc_PM2,P_Wc_PM2] = bode(H_shortp_cl(2),Wc_PM*1.01);
+phase_rate = -(P_Wc_PM2-P_Wc_PM)/((Wc_PM*0.01)/(2*pi));
 figure(9);
+patch([0 0 2 2], [0 100 100 0],[0.9290, 0.640, 0.1250],'FaceAlpha',0.3);
 l = linspace(0, 2*pi, 200);
-x = 0.3 * cos(l) + 1.2;
+x = 0.35 * cos(l) + 1.2;
 y = 20 * sin(l) + 75;
-patch(x, y, [0, 0.4470, 0.7410],'FaceAlpha',0.3);
+patch(x, y, [0.2    0.600    1],'FaceAlpha',0.9);
 hold on 
-plot(Wcp,phase_rate,'r*','linewidth',2)  %check qm/qs
+plot(Wc_PM/(2*pi),phase_rate,'r*','linewidth',2)
 yline(100,'--k');
+%text(0.1,110,'PIO','FontSize',15)
+%text(0.1,90,'No PIO','FontSize',15)
 ylim([0 300])
-xlim([0 Wcp])
+xlim([0 2])
 title({'Gibson Rate Criterion'},'FontWeight','Normal')
 grid on
+grid minor
 xlabel('-180^{\circ} phase lag frequency [Hz]');
 ylabel('phase rate [^{\circ}/Hz]');
-legend('optimal region','current parameter value')
+legend('No PIO region','optimal region','current parameter value')
 set(gca,'FontSize',15);
-
-
-
-%% CHAPTER 8
-
-altitude = 5000; %input('Enter the altitude for the simulation (ft)  :  ');
-velocity = 300; %input('Enter the velocity for the simulation (ft/s):  ');
-
-A_gs = A_longitude_lo([1 3 4 2 5], [1 3 4 2 5]);
-B_gs = B_longitude_lo([1 3 4 2 5], [1]);
-C_gs = C_longitude_lo([1 3 4 2 5], [1 3 4 2 5]);
-D_gs = D_longitude_lo([1 3 4 2 5], [1]);
 
