@@ -530,7 +530,7 @@ ylabel('[\circ] and [\circ/s]');
 title('Input and Short period response','FontWeight','Normal')
 set(gca,'FontSize',15)
 
-%% PLOT CAP
+%% CAP CHANGE TO CAT. B
 figure(8);
 patch([0.3 0.3 1.5 1.5 0.3],[0.28 3.6 3.6 0.28 0.28],[0.9100    0.200    0.1700],'FaceAlpha',0.2)
 hold on
@@ -567,8 +567,8 @@ set(gca,'FontSize',15)
 
 
 %% GIBSON RATE CRITERION
-[G_Wcp,P_Wcp,Wcg,Wcp] = margin(H_q_de*lead_lag); %Change TF to cl
-[G_2Wcp,P_2Wcp] = bode(H_q_de*lead_lag,2*Wcp);
+[G_Wcp,P_Wcp,Wcg,Wcp] = margin(-H_q_de); %Change TF to cl
+[G_2Wcp,P_2Wcp] = bode(-H_q_de,2*Wcp);
 phase_rate = -(P_2Wcp-P_Wcp)/(Wcp);
 figure(9);
 l = linspace(0, 2*pi, 200);
@@ -576,10 +576,10 @@ x = 0.3 * cos(l) + 1.2;
 y = 20 * sin(l) + 75;
 patch(x, y, [0, 0.4470, 0.7410],'FaceAlpha',0.3);
 hold on 
-plot(DB_q_ss_cl,2.5,'r*','linewidth',2)  %check qm/qs
+plot(Wcp,phase_rate,'r*','linewidth',2)  %check qm/qs
 yline(100,'--k');
 ylim([0 300])
-xlim([0 2])
+xlim([0 Wcp])
 title({'Gibson Rate Criterion'},'FontWeight','Normal')
 grid on
 xlabel('-180^{\circ} phase lag frequency [Hz]');
@@ -587,3 +587,6 @@ ylabel('phase rate [^{\circ}/Hz]');
 legend('optimal region','current parameter value')
 set(gca,'FontSize',15);
 
+
+
+%% 
