@@ -40,7 +40,7 @@ Model {
       UnitExpr		      "inherit"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.137"
+    ComputedModelVersion    "1.138"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -56,12 +56,12 @@ Model {
     NumExternalFileReferences 0
     OrderedModelArguments   1
   }
+  WebScopes_FoundationPlugin "on"
   DiagnosticSuppressor	  "on"
   LogicAnalyzerPlugin	  "on"
-  SLCCPlugin		  "on"
   AnimationPlugin	  "on"
-  WebScopes_FoundationPlugin "on"
   NotesPlugin		  "on"
+  SLCCPlugin		  "on"
   EnableAccessToBaseWorkspace on
   ScopeRefreshTime	  0.035000
   OverrideScopeRefreshTime on
@@ -165,18 +165,18 @@ Model {
       }
       WindowUuid	      "dab67265-d364-4397-a616-4409b6e6ecb7"
     }
-    BDUuid		    ""
+    BDUuid		    "79a30952-d0c3-4d3a-a660-4ad4adcf6f61"
   }
   HideAutomaticNames	  on
   Created		  "Fri Mar 29 16:23:28 2002"
   Creator		  "keviczky"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "lunap"
+  LastModifiedBy	  "tomas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Nov 21 17:04:16 2019"
-  RTWModifiedTimeStamp	  496256538
-  ModelVersionFormat	  "1.%<AutoIncrement:137>"
+  LastModifiedDate	  "Wed Nov 27 15:40:47 2019"
+  RTWModifiedTimeStamp	  496756195
+  ModelVersionFormat	  "1.%<AutoIncrement:138>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "none"
@@ -337,13 +337,13 @@ Model {
 	  Description		  ""
 	  Components		  []
 	  Decimation		  "50"
-	  ExternalInput		  "[t, u]"
+	  ExternalInput		  "[0 4602.14522508224 -1.18950313703318 -0.0945460997882722 -0.0601289467363442]"
 	  FinalStateName	  "xFinal"
-	  InitialState		  "xInitial"
+	  InitialState		  "[]"
 	  LimitDataPoints	  off
 	  MaxDataPoints		  "1000"
-	  LoadExternalInput	  off
-	  LoadInitialState	  off
+	  LoadExternalInput	  on
+	  LoadInitialState	  on
 	  SaveFinalState	  off
 	  SaveOperatingPoint	  off
 	  SaveFormat		  "Array"
@@ -394,7 +394,7 @@ Model {
 	  BlockReduction	  on
 	  BooleanDataType	  off
 	  ConditionallyExecuteInputs on
-	  DefaultParameterBehavior "Tunable"
+	  DefaultParameterBehavior "Inlined"
 	  UseDivisionForNetSlopeComputation "off"
 	  GainParamInheritBuiltInType off
 	  UseFloatMulNetSlope	  off
@@ -402,7 +402,7 @@ Model {
 	  UseSpecifiedMinMax	  off
 	  InlineInvariantSignals  off
 	  OptimizeBlockIOStorage  on
-	  BufferReuse		  on
+	  BufferReuse		  off
 	  EnhancedBackFolding	  off
 	  CachingGlobalReferences off
 	  GlobalBufferReuse	  on
@@ -533,7 +533,7 @@ Model {
 	  ChecksumConsistencyForSSReuse	"none"
 	  PregeneratedLibrarySubsystemCodeDiagnostic "warning"
 	  MatchCodeGenerationContextForUpdateDiagram "none"
-	  InitInArrayFormatMsg	  "warning"
+	  InitInArrayFormatMsg	  "none"
 	  StrictBusMsg		  "ErrorLevel1"
 	  BusNameAdapt		  "WarnAndRepair"
 	  NonBusSignalsTreatedAsBus "none"
@@ -1298,7 +1298,7 @@ Model {
   System {
     Name		    "LIN_F16Block"
     Location		    [-7, -7, 1543, 841]
-    Open		    on
+    Open		    off
     PortBlocksUseCompactNotation off
     SetExecutionDomain	    off
     ExecutionDomainType	    "Deduce"
