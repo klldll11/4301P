@@ -32,7 +32,7 @@ R=[1/250000 0
 
 K=lqr(SS_gs,Q,R)
 KA=K([1 2],[1 2])
-KB=K([1 2],[3 4 5])
+KB=K([3 4 5],[1 2])
 
 %Assuming initial guess for trim, q=0 and theta=0
 init_cond = [altitude, velocity, alpha, 0 ,0];
