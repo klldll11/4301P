@@ -217,53 +217,34 @@ set(gca,'FontSize',15)
 
 %% GIBSON RATE CRITERION
 
-w = linspace(1e-1,1e2,10000);
-mag = @(s) abs((num_tt_de_cl(3).*s.*1j+num_tt_de_cl(4))./((s.*1j).^3+den_tt_de_cl(2).*(s.*1j).^2+den_tt_de_cl(3).*s.*1j));
-phase = @(s) unwrap(angle((num_tt_de_cl(3).*s.*1j+num_tt_de_cl(4))./((s.*1j).^3+den_tt_de_cl(2).*(s.*1j).^2+den_tt_de_cl(3).*s.*1j)))*180/pi;
+% w = linspace(1e-1,1e2,10000);
+% %mag = @(s) abs((num_tt_de_cl(3).*s.*1j+num_tt_de_cl(4))./((s.*1j).^3+den_tt_de_cl(2).*(s.*1j).^2+den_tt_de_cl(3).*s.*1j));
+% %phase = @(s) unwrap(angle((num_tt_de_cl(3).*s.*1j+num_tt_de_cl(4))./((s.*1j).^3+den_tt_de_cl(2).*(s.*1j).^2+den_tt_de_cl(3).*s.*1j)))*180/pi;
 % mag = @(s) abs((num_q_de_cl(2).*s.*1j+num_q_de_cl(3))./((s.*1j).^2+den_q_de_cl(2).*s.*1j+den_q_de_cl(3)));
 % phase = @(s) unwrap(angle((num_q_de_cl(2).*s.*1j+num_q_de_cl(3))./((s.*1j).^2+den_q_de_cl(2).*s.*1j+den_q_de_cl(3))))*180/pi;
-w_PM = w(abs(phase(w)--180) < 1e-2);
-w_PM2 = w(find(w==w_PM)+1);
-
-
-phase_rate = -(phase(w_PM2)-phase(w_PM))/(w_PM2-w_PM);
-figure(9);
-patch([0 0 2 2], [0 100 100 0],[0.9290, 0.640, 0.1250],'FaceAlpha',0.3);
-l = linspace(0, 2*pi, 200);
-x = 0.35 * cos(l) + 1.2;
-y = 20 * sin(l) + 75;
-patch(x, y, [0.2    0.600    1],'FaceAlpha',0.9);
-hold on 
-plot(w_PM/(2*pi),phase_rate,'r*','linewidth',2)
-yline(100,'--k');
-%text(0.1,110,'PIO','FontSize',15)
-%text(0.1,90,'No PIO','FontSize',15)
-ylim([0 300])
-xlim([0 2])
-title({'Gibson Rate Criterion'},'FontWeight','Normal')
-grid on
-grid minor
-xlabel('-180^{\circ} phase lag frequency [Hz]');
-ylabel('phase rate [^{\circ}/Hz]');
-legend('No PIO region','optimal region','current parameter value')
-set(gca,'FontSize',15);
-
-
-%%
-
-
-phase = @(s) unwrap(angle((num_tt_de_cl(3).*s.*1j+num_tt_de_cl(4))./((s.*1j).^3+den_tt_de_cl(2).*(s.*1j).^2+den_tt_de_cl(3).*s.*1j)))*180/pi;
-mag = @(s) mag(((num_tt_de_cl(3).*s.*1j+num_tt_de_cl(4))./((s.*1j).^3+den_tt_de_cl(2).*(s.*1j).^2+den_tt_de_cl(3).*s.*1j)))*180/pi;
-
-
-figure(12);
-
-%deriv = -phase_rate.*w-phase(w_PM)+phase_rate.*w_PM;
-%plot(w,deriv)
-hold on
-plot(w,phase(w))
-set(gca, 'XScale', 'log','FontSize',15)
-
-%figure(13);
-%plot(w,mag(w))
-%set(gca, 'XScale', 'log','FontSize',15)
+% w_PM = w(abs(phase(w)--180) < 1e-2);
+% w_PM2 = w(find(w==w_PM)+1);
+% 
+% 
+% phase_rate = -(phase(w_PM2)-phase(w_PM))/(w_PM2-w_PM);
+% figure(9);
+% patch([0 0 2 2], [0 100 100 0],[0.9290, 0.640, 0.1250],'FaceAlpha',0.3);
+% l = linspace(0, 2*pi, 200);
+% x = 0.35 * cos(l) + 1.2;
+% y = 20 * sin(l) + 75;
+% patch(x, y, [0.2    0.600    1],'FaceAlpha',0.9);
+% hold on 
+% plot(w_PM/(2*pi),phase_rate,'r*','linewidth',2)
+% yline(100,'--k');
+% %text(0.1,110,'PIO','FontSize',15)
+% %text(0.1,90,'No PIO','FontSize',15)
+% ylim([0 300])
+% xlim([0 2])
+% title({'Gibson Rate Criterion'},'FontWeight','Normal')
+% grid on
+% grid minor
+% xlabel('-180^{\circ} phase lag frequency [Hz]');
+% ylabel('phase rate [^{\circ}/Hz]');
+% legend('No PIO region','optimal region','current parameter value')
+% set(gca,'FontSize',15);
+% 
