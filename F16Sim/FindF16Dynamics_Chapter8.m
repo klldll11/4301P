@@ -1,13 +1,17 @@
 
 %% CHAPTER 8
 load('ABCD_Ch8.mat')
-altitude = 5000; %input('Enter the altitude for the simulation (ft)  :  ');
-velocity = 300; %input('Enter the velocity for the simulation (ft/s):  ');
-thrust = 5000;          % thrust, lbs
-elevator = -0.09;       % elevator, degrees
-alpha = 8.49;              % AOA, degrees
-rudder = -0.01;             % rudder angle, degrees
-aileron = 0.01;            % aileron, degrees
+cost   = 4.7464e-30;
+thrust = 2826.8165; % thrust, lbs
+elevator   = -4.1891; % elevator, degrees
+aileron    = -1.9926e-15; % aileron, degrees
+rudder    = 1.2406e-14; % rudder angle, degrees
+alpha  = 10.4511; % AOA, degrees
+dLEF   = 0;
+velocity   = 300; %ft/s
+altitude = 5000; %ft
+
+
 s = tf('s');
 
 
@@ -19,20 +23,7 @@ D_gs = D_longitude_lo([1 3 4 2 5], [1, 2]);
 
 hdot = -5*pi;
 t = 2000/(5*pi);
- SS_gs =ss(A_gs,B_gs,C_gs,D_gs);
-% C = pidTuner (SS_gs);
-
-Q=[1/100 0 0 0 0
-    0 1/(900) 0 0 0
-    0 0 1 0 0
-    0 0 0 1/4 0
-    0 0 0 0 1];
-R=[1/250000 0
-    0  1/25];
-
-K=lqr(SS_gs,Q,R)
-KA=K([1 2],[1 2])
-KB=K([1 2],[3 4 5])
+SS_gs =ss(A_gs,B_gs,C_gs,D_gs);
 
 %Assuming initial guess for trim, q=0 and theta=0
 init_cond = [altitude, velocity, alpha, 0 ,0];

@@ -579,8 +579,7 @@ ylabel('phase rate [^{\circ}/Hz]');
 legend('No PIO region','optimal region','current parameter value')
 set(gca,'FontSize',15);
 
-<<<<<<< HEAD
-=======
+
 
 
 %% CHAPTER 8
@@ -593,7 +592,5 @@ B_gs = A_longitude_lo([1 3 4 2 5], [6, 7]);
 C_gs = C_longitude_lo([1 3 4 2 5], [1 3 4 2 5]);
 D_gs = D_longitude_lo([1 3 4 2 5], [1]);
 
-init_cond = [altitude, velocity, 0, 0 ,0];
 
 
->>>>>>> b8c117eb4fd19e821b826eb82120283113b690fd
