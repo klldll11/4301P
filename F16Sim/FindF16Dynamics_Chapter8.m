@@ -10,7 +10,12 @@ alpha  = 10.4511; % AOA, degrees
 dLEF   = 0;
 velocity   = 300; %ft/s
 altitude = 5000; %ft
+runway_altitude = 3000; %ft
 
+Init_h = altitude - runway_altitude;
+dist_levelled_flight = 3000;
+ 
+x0= Init_h/tan(3*pi/180)+ dist_levelled_flight;
 
 s = tf('s');
 
