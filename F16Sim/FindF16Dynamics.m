@@ -27,8 +27,8 @@ xa4=6*0.3048;
 xa5=7*0.3048;
 xa6=15*0.3048;
 disp(sprintf('xa: %f', xa));
-altitude = 10000; %input('Enter the altitude for the simulation (ft)  :  ');
-velocity = 900; %input('Enter the velocity for the simulation (ft/s):  ');
+altitude =15000 ; %input('Enter the altitude for the simulation (ft)  :  ');
+velocity = 500; %input('Enter the velocity for the simulation (ft/s):  ');
 
 %% Initial guess for trim
 %%
