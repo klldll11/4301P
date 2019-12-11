@@ -28,6 +28,7 @@ D_gs = D_longitude_lo([1 3 4 2 5], [1, 2]);
 
 hdot = -5*pi;
 t = 2000/(5*pi);
+t_maneuver_1 = t+10;
 SS_gs =ss(A_gs,B_gs,C_gs,D_gs);
 
 %Assuming initial guess for trim, q=0 and theta=0
