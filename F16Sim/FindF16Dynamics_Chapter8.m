@@ -17,6 +17,9 @@ dist_levelled_flight = 3000;
  
 x0= Init_h/tan(3*pi/180)+ dist_levelled_flight;
 
+%Comment out after experiments are done
+x0= x0 - 3000;
+
 s = tf('s');
 
 
