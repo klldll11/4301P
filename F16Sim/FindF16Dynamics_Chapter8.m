@@ -22,7 +22,7 @@ x0= x0 - 3000;
 
 s = tf('s');
 
-
+R_0 = (Init_h^2+x0^2)^0.5;
 
 A_gs = A_longitude_lo([1 3 4 2 5], [1 3 4 2 5]);
 B_gs = A_longitude_lo([1 3 4 2 5], [6, 7]);
@@ -37,3 +37,7 @@ SS_gs =ss(A_gs,B_gs,C_gs,D_gs);
 %Assuming initial guess for trim, q=0 and theta=0
 init_cond = [altitude, velocity, alpha, 0 ,0];
 
+
+d_0 = sin(3*pi/180)*9*300;
+Gamma_0 = d_0/R_0;
+Slope_Ramp_Gamma = -300*sin(3*pi/180)/R_0;

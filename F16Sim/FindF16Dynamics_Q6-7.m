@@ -245,12 +245,12 @@ legend('\phi');
 set(findall(gcf,'-property','FontSize'),'FontSize',15)
 
 subplot(3,1,3);
-plot(t,y_lat_aileron(:,[4]),'LineWidth',1.5,'color',[0 0.5 1])
+plot(t,y_lat_aileron(:,[3]),'LineWidth',1.5,'color',[0 0.5 1])
 grid on
 ylabel('[deg/s]');
 xlim([0 7]);
 set(legend,'FontName','Helvetica','Location','Northeast');
-legend('r');
+legend('p');
 set(findall(gcf,'-property','FontSize'),'FontSize',15)
 
 saveas(figure(5),'Plots\aperiodicroll.png')
@@ -309,7 +309,7 @@ H_shortp = [H_q_de; H_q_de/s];
 k_q = num_q_de(3); %Assumed to be constant
 T_tt2 = num_q_de(2)/k_q;
 freq_shortp = (den_q_de(3))^0.5;
-damp_shortp = den_q_de(2) / (2 * freq_shortp);
+damp_shortp = den_q_de(2) / (2 * freq_shortp)
 g = 9.80665;
 
 % required parameters (rq)
@@ -321,7 +321,7 @@ DB_qs_rq = T_tt2_rq - 2 * damp_shortp_rq / freq_shortp_rq;
 
 %using Ackermann's formula
 s=tf('s');
-p_alfa = (A_shortp^2) + damp_shortp_rq * freq_shortp_rq *2 * A_shortp + eye(2)* (freq_shortp_rq)^2;
+p_alfa = (A_shortp^2) + damp_shortp_rq * freq_shortp_rq *2 * A_shortp + eye(2)* (freq_shortp_rq)^2
 C_m=[B_shortp A_shortp * B_shortp];
 
 %Feedback matrix in degreees per radians
@@ -330,7 +330,7 @@ K_ackermann = [0 1] * C_m^(-1)*p_alfa;
 A_ackermann = A_shortp-B_shortp*K_ackermann;
 sys_shortp_cl = ss(A_ackermann, B_shortp,C_shortp,D_shortp);
 
-lead_lag=(k_q*(1+T_tt2_rq * s))/(num_q_de(3)+num_q_de(2)*s);
+lead_lag=(k_q*(1+T_tt2_rq * s))/(num_q_de(3)+num_q_de(2)*s)
 H_q_de_cl = minreal(tf(sys_shortp_cl(2)) * lead_lag);
 H_aa_de_cl = minreal(tf(sys_shortp_cl(1)) * lead_lag);
 
@@ -348,7 +348,7 @@ T_tt2_cl = num_q_de_cl(2)/k_q;
 CAP_cl = g * freq_shortp_cl^2 * T_tt2_cl / (velocity * 0.3048);
 
 %% TIME RESPONSE
-dt = 0.01;
+dt = 0.001;
 t_max = 15;
 t = [0:dt:t_max];
 u_step_10s = [0 ones(1,10/dt) zeros(1,(t_max-10)/dt)];
