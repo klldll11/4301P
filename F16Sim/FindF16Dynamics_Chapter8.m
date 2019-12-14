@@ -45,11 +45,14 @@ Slope_Ramp_Gamma = -300*sin(3*pi/180)/R_0;
 %% FLARE
 
 x1 = 1100; %ft
-x2 = x1/3; %ft
-tau = x1/(3*velocity); %t=4*tau
+x2 = x1/2; %ft
+tau = x1/(2*velocity); %t=4*tau
 x_flare = x2*3*pi/180;
+t_flare = 137 - 3;
+
+t_touchdown = t_flare + 3*tau;
 
 
-
-
+Gamma_f = -(x1*3/R_0)*pi/180; %rad
+Slope_flare = (Gamma_f-0)/(t_touchdown-t_flare);
 
