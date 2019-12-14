@@ -48,7 +48,7 @@ x1 = 1100; %ft
 x2 = x1/2; %ft
 tau = x1/(2*velocity); %t=4*tau
 x_flare = x2*3*pi/180;
-t_flare = 137.65 - 1.83;
+t_flare = 137.55 - 1.83;
 
 t_touchdown = t_flare + 3*tau;
 
