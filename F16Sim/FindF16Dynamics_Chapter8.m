@@ -41,3 +41,15 @@ init_cond = [altitude, velocity, alpha, 0 ,0];
 d_0 = sin(3*pi/180)*9*300;
 Gamma_0 = d_0/R_0;
 Slope_Ramp_Gamma = -300*sin(3*pi/180)/R_0;
+
+%% FLARE
+
+x1 = 1100; %ft
+x2 = x1/3; %ft
+tau = x1/(3*velocity); %t=4*tau
+x_flare = x2*3*pi/180;
+
+
+
+
+
