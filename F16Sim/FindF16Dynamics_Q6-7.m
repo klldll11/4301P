@@ -265,7 +265,7 @@ D_shortp = D_ac_long([2 4], [1]);
 
 SS_shortp = (1)*ss(A_shortp,B_shortp,C_shortp,D_shortp);
 
-%% Time response comparison
+% Time response comparison
 
 dt = 0.01;
 t_max = 15;
@@ -275,7 +275,7 @@ y_long = lsim(SS_ac_long,u_elevator,t);
 y_long_simplified = lsim(SS_shortp,u_elevator,t);
 
 figure(7)
-subplot(2,1,1);
+subplot(3,1,1);
 plot(t,u_elevator,'LineWidth',1.5,'Color',[0 0.6 0.3])
 ylabel({'[deg]'});
 set(legend,'FontName','Helvetica','Location','Northeast');
@@ -285,7 +285,7 @@ set(findall(gcf,'-property','FontSize'),'FontSize',15)
 xlim([0 t_max]);
 
 
-subplot(2,1,2);
+subplot(3,1,3);
 plot(t,y_long(:,[4]),'LineWidth',1.5,'color',[1 0.5 0])
 hold on 
 plot(t,y_long_simplified(:,2),'LineWidth',1.5,'color',[0 0.5 1])
@@ -296,6 +296,20 @@ set(legend,'FontName','Helvetica','Location','Northeast');
 legend('q, 4-state model','q, 2-state model');
 xlim([0 t_max]);
 set(findall(gcf,'-property','FontSize'),'FontSize',15)
+
+
+subplot(3,1,2);
+plot(t,y_long(:,[2]),'LineWidth',1.5,'color',[1 0.5 0])
+hold on 
+plot(t,y_long_simplified(:,1),'LineWidth',1.5,'color',[0 0.5 1])
+grid on
+xlabel('Time [s]');
+ylabel('[deg]');
+set(legend,'FontName','Helvetica','Location','Northeast');
+legend('\alpha, 4-state model','\alpha, 2-state model');
+xlim([0 t_max]);
+set(findall(gcf,'-property','FontSize'),'FontSize',15)
+
 
 saveas(figure(7),'Plots\comparison-2st-4st.png')
 %%
