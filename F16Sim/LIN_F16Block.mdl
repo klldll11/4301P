@@ -40,7 +40,7 @@ Model {
       UnitExpr		      "inherit"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.138"
+    ComputedModelVersion    "1.139"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -82,7 +82,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [-7.0, -7.0, 1550.0, 848.0]
+      Location		      [-7.0, -7.0, 1550.0, 838.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -91,7 +91,7 @@ Model {
 	DockPosition		"Left"
 	Width			[50]
 	Height			[50]
-	Filter			[8]
+	Filter			[9]
 	Minimized		"Unset"
       }
       Object {
@@ -107,23 +107,23 @@ Model {
 	  $ObjectID		  5
 	  IsActive		  [1]
 	  IsTabbed		  [1]
-	  ViewObjType		  "SimulinkTopLevel"
-	  LoadSaveID		  "0"
-	  Extents		  [1875.0, 767.0]
-	  ZoomFactor		  [1.4187575050844772]
-	  Offset		  [-68.646896654681086, -99.046659639305986]
-	  SceneRectInView	  [-68.646896654681086, -99.046659639305986, 1057.263129621778, 432.4911042239487]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "92"
+	  Extents		  [1875.0, 755.0]
+	  ZoomFactor		  [1.7499999999999998]
+	  Offset		  [-105.93142857143073, -88.937142857143044]
+	  SceneRectInView	  [-105.93142857143073, -88.937142857143044, 857.14285714285734, 345.14285714285722]
 	}
 	Object {
 	  $ObjectID		  6
 	  IsActive		  [0]
 	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "92"
-	  Extents		  [1875.0, 767.0]
-	  ZoomFactor		  [1.0]
-	  Offset		  [-499.59999999999991, -196.40000000000003]
-	  SceneRectInView	  [-499.59999999999991, -196.40000000000003, 1500.0, 613.6]
+	  ViewObjType		  "SimulinkTopLevel"
+	  LoadSaveID		  "0"
+	  Extents		  [1875.0, 755.0]
+	  ZoomFactor		  [1.3965605167389572]
+	  Offset		  [-77.0489877510131, -99.046659639305986]
+	  SceneRectInView	  [-77.0489877510131, -99.046659639305986, 1074.0673118144421, 432.4911042239487]
 	}
 	Object {
 	  $ObjectID		  7
@@ -157,7 +157,7 @@ Model {
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
       "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAAB5AP///wAAAAEAAAAAAAAAAPwCA"
       "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
-      "QBjAHQAbwByAAAAAAD/////AAAARgD///8AAAeAAAADRQAAAAEAAAACAAAAAQAAAAL8AAAAAA=="
+      "QBjAHQAbwByAAAAAAD/////AAAARgD///8AAAeAAAADOQAAAAEAAAACAAAAAQAAAAL8AAAAAA=="
       Array {
 	Type			"Cell"
 	Dimension		0
@@ -174,9 +174,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "tomas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Nov 27 15:40:47 2019"
-  RTWModifiedTimeStamp	  496756195
-  ModelVersionFormat	  "1.%<AutoIncrement:138>"
+  LastModifiedDate	  "Sun Feb 09 14:11:22 2020"
+  RTWModifiedTimeStamp	  503148675
+  ModelVersionFormat	  "1.%<AutoIncrement:139>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "none"
@@ -1297,7 +1297,7 @@ Model {
   }
   System {
     Name		    "LIN_F16Block"
-    Location		    [-7, -7, 1543, 841]
+    Location		    [-7, -7, 1543, 831]
     Open		    off
     PortBlocksUseCompactNotation off
     SetExecutionDomain	    off
@@ -1312,7 +1312,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "142"
+    ZoomFactor		    "140"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "103"
     SimulinkSubDomain	    "Simulink"
@@ -2677,8 +2677,8 @@ Model {
       ContentPreviewEnabled   on
       System {
 	Name			"Subsystem"
-	Location		[-7, -7, 1543, 841]
-	Open			off
+	Location		[-7, -7, 1543, 831]
+	Open			on
 	PortBlocksUseCompactNotation off
 	SetExecutionDomain	off
 	ExecutionDomainType	"Deduce"
@@ -2692,22 +2692,33 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"100"
+	ZoomFactor		"175"
 	SimulinkSubDomain	"Simulink"
 	Block {
 	  BlockType		  Inport
-	  Name			  "In1"
+	  Name			  "18_states"
 	  SID			  "93"
 	  Position		  [110, 103, 140, 117]
 	  ZOrder		  -1
 	  IconDisplay		  "Port number"
 	}
 	Block {
+	  BlockType		  Gain
+	  Name			  "1/g_D"
+	  SID			  "101"
+	  Position		  [425, 50, 510, 80]
+	  ZOrder		  14
+	  Gain			  "1/9.80665"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
 	  BlockType		  Sum
 	  Name			  "Add"
 	  SID			  "100"
 	  Ports			  [2, 1]
-	  Position		  [495, 92, 525, 123]
+	  Position		  [600, 77, 630, 108]
 	  ZOrder		  13
 	  InputSameDT		  off
 	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
@@ -2723,23 +2734,20 @@ Model {
 	  BackgroundColor	  "black"
 	  ShowName		  off
 	  Outputs		  "[10 1 3 1 3]"
-	}
-	Block {
-	  BlockType		  Gain
-	  Name			  "Gain"
-	  SID			  "101"
-	  Position		  [400, 40, 430, 70]
-	  ZOrder		  14
-	  Gain			  "1/9.80665"
-	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SaturateOnIntegerOverflow off
+	  Port {
+	    PortNumber		    2
+	    Name		    "q_dot"
+	  }
+	  Port {
+	    PortNumber		    4
+	    Name		    "nz"
+	  }
 	}
 	Block {
 	  BlockType		  Terminator
 	  Name			  "Terminator"
 	  SID			  "96"
-	  Position		  [315, 20, 335, 40]
+	  Position		  [315, 10, 335, 30]
 	  ZOrder		  10
 	}
 	Block {
@@ -2760,7 +2768,7 @@ Model {
 	  BlockType		  Gain
 	  Name			  "xa"
 	  SID			  "99"
-	  Position		  [350, 40, 380, 70]
+	  Position		  [350, 50, 380, 80]
 	  ZOrder		  9
 	  Gain			  "xa"
 	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
@@ -2769,17 +2777,18 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "Out1"
+	  Name			  "a_n"
 	  SID			  "94"
-	  Position		  [715, 103, 745, 117]
+	  Position		  [715, 88, 745, 102]
 	  ZOrder		  -2
 	  IconDisplay		  "Port number"
 	}
 	Line {
+	  Name			  "q_dot"
 	  ZOrder		  3
+	  Labels		  [1, 1]
 	  SrcBlock		  "Demux1"
 	  SrcPort		  2
-	  Points		  [18, 0; 0, -10]
 	  DstBlock		  "xa"
 	  DstPort		  1
 	}
@@ -2806,16 +2815,18 @@ Model {
 	}
 	Line {
 	  ZOrder		  8
-	  SrcBlock		  "In1"
+	  SrcBlock		  "18_states"
 	  SrcPort		  1
 	  DstBlock		  "Demux1"
 	  DstPort		  1
 	}
 	Line {
+	  Name			  "nz"
 	  ZOrder		  10
+	  Labels		  [1, 1]
 	  SrcBlock		  "Demux1"
 	  SrcPort		  4
-	  Points		  [137, 0; 0, -40]
+	  Points		  [238, 0; 0, -55]
 	  DstBlock		  "Add"
 	  DstPort		  2
 	}
@@ -2823,21 +2834,21 @@ Model {
 	  ZOrder		  11
 	  SrcBlock		  "Add"
 	  SrcPort		  1
-	  DstBlock		  "Out1"
+	  DstBlock		  "a_n"
 	  DstPort		  1
 	}
 	Line {
 	  ZOrder		  12
 	  SrcBlock		  "xa"
 	  SrcPort		  1
-	  DstBlock		  "Gain"
+	  DstBlock		  "1/g_D"
 	  DstPort		  1
 	}
 	Line {
 	  ZOrder		  14
-	  SrcBlock		  "Gain"
+	  SrcBlock		  "1/g_D"
 	  SrcPort		  1
-	  Points		  [45, 0]
+	  Points		  [23, 0; 0, 20]
 	  DstBlock		  "Add"
 	  DstPort		  1
 	}
