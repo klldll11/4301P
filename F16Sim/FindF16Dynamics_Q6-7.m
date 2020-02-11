@@ -69,8 +69,10 @@ u_elevator = [0 ones(1, size(t,2)-1)];
 y_long = lsim(SS_ac_long,u_elevator,t);
 u_aileron = [0 ones(1, size(t,2)-1); zeros(size(t))];
 u_rudder =  [zeros(size(t)); 0 ones(1, size(t,2)-1)];
+u_rudder_10 = [zeros(size(t)); 0, ones(1, 10/dt-1), zeros(1, size(t,2)-10/dt)];
 y_lat_aileron = lsim(SS_ac_lat,u_aileron,t);
 y_lat_rudder = lsim(SS_ac_lat,u_rudder,t);
+y_lat_rudder_10 = lsim(SS_ac_lat,u_rudder_10,t);
 
 
 %% SHORT PERIOD
@@ -129,7 +131,7 @@ xlim([0 500]);
 subplot(4,1,2);
 plot(t,y_long(:,[1]),'LineWidth',1.5,'color',[1 0.5 0])
 grid on
-ylabel('[m/s]');
+ylabel('[ft/s]');
 xlim([0 500]);
 set(legend,'FontName','Helvetica','Location','Southeast');
 legend('V');
@@ -151,7 +153,7 @@ xlabel('Time [s]');
 ylabel('[deg/s]');
 set(legend,'FontName','Helvetica','Location','Southeast');
 legend('q');
-xlim([0 1000]);
+xlim([0 500]);
 set(findall(gcf,'-property','FontSize'),'FontSize',15)
 
 saveas(figure(2),'Plots\phugoid.png')
@@ -192,30 +194,30 @@ saveas(figure(3),'Plots\dutchroll.png')
 
 figure(4)
 subplot(3,1,1);
-plot(t,u_aileron(1,:),'LineWidth',1.5,'Color',[0 0.6 0.3])
+plot(t,u_rudder_10(1,:),'LineWidth',1.5,'Color',[0 0.6 0.3])
 hold on
-plot(t,u_aileron(2,:),'LineWidth',1.5,'Color',[0.2 0.8 0.8])
+plot(t,u_rudder_10(2,:),'LineWidth',1.5,'Color',[0.2 0.8 0.8])
 ylabel({'[deg]'});
 set(legend,'FontName','Helvetica','Location','Northeast');
 legend('\delta_{a}','\delta_r');
 grid on
 set(findall(gcf,'-property','FontSize'),'FontSize',15)
-xlim([0 130]);
+xlim([0 60]);
 
 subplot(3,1,2);
-plot(t,y_lat_aileron(:,[1]),'LineWidth',1.5,'color',[1 0.5 0])
+plot(t,y_lat_rudder_10(:,[2]),'LineWidth',1.5,'color',[1 0.5 0])
 grid on
 ylabel('[deg]');
-xlim([0 130]);
+xlim([0 60]);
 set(legend,'FontName','Helvetica','Location','Northeast');
 legend('\phi');
 set(findall(gcf,'-property','FontSize'),'FontSize',15)
 
 subplot(3,1,3);
-plot(t,y_lat_aileron(:,[4]),'LineWidth',1.5,'color',[0 0.5 1])
+plot(t,y_lat_rudder_10(:,[4]),'LineWidth',1.5,'color',[0 0.5 1])
 grid on
 ylabel('[deg/s]');
-xlim([0 130]);
+xlim([0 60]);
 set(legend,'FontName','Helvetica','Location','Northeast');
 legend('r');
 set(findall(gcf,'-property','FontSize'),'FontSize',15)
