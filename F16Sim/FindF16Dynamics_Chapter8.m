@@ -48,7 +48,7 @@ x1 = 1100; %ft
 x2 = x1/2; %ft
 tau = x1/(2*velocity); %t=3*tau
 h_flare = x2*3*pi/180;
-t_flare = 137.65 - 1.83; %time it takes to reach the ground from following a 3 deg glideslope - time from h_flare to the ground following a 3 deg glideslope
+t_flare = 137.62 - 1.83; %time it takes to reach the ground from following a 3 deg glideslope - time from h_flare to the ground following a 3 deg glideslope
 
 t_touchdown = t_flare + 3*tau; 
 
