@@ -18,7 +18,7 @@ dist_levelled_flight = 3000;
 x0= Init_h/tan(3*pi/180)+ dist_levelled_flight;
 
 %Comment out after experiments are done
-x0= x0 - 3000;
+%x0= x0 - 3000;
 
 s = tf('s');
 
@@ -38,7 +38,7 @@ SS_gs =ss(A_gs,B_gs,C_gs,D_gs);
 init_cond = [altitude, velocity, alpha, 0 ,0];
 
 t_intercept = 9.6;
-d_0 = sin(3*pi/180)*10*300;
+d_0 = sin(3*pi/180)*9.6*300;
 Gamma_0 = d_0/R_0;
 Slope_Ramp_Gamma = -300*sin(3*pi/180)/R_0;
 
@@ -48,7 +48,7 @@ x1 = 1100; %ft
 x2 = x1/2; %ft
 tau = x1/(2*velocity); %t=3*tau
 h_flare = x2*3*pi/180;
-t_flare = 137.62 - 1.83; %time it takes to reach the ground from following a 3 deg glideslope - time from h_flare to the ground following a 3 deg glideslope
+t_flare = 137.65 - 1.83; %time it takes to reach the ground from following a 3 deg glideslope - time from h_flare to the ground following a 3 deg glideslope
 
 t_touchdown = t_flare + 3*tau; 
 
