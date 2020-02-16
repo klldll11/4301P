@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%% CHAPTER 6 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all
-load('ABCD_full.mat') %State space system for given flight conditions
+load('ABCD_full.mat') % State space system for given flight conditions
 altitude = 10000;
 velocity = 900;
 s=tf ('s');
@@ -67,10 +67,10 @@ time_const_ap_roll = - 1 / poles_lat(4);
 
 dt = 0.01;       % time step
 t = [0:dt:1000]; % simulation time
-u_elevator = [0 ones(1, size(t,2)-1)];                                           % step input elevator
-u_aileron = [0 ones(1, size(t,2)-1); zeros(size(t))];                            % step input aileron only 
-u_rudder =  [zeros(size(t)); 0 ones(1, size(t,2)-1)];                            % step input rudder only
-u_rudder_10 = [zeros(size(t)); 0, ones(1, 10/dt-1), zeros(1, size(t,2)-10/dt)];  % 10s-long step rudder 
+u_elevator = [0 ones(1, size(t,2)-1)];                                           % unit step input elevator
+u_aileron = [0 ones(1, size(t,2)-1); zeros(size(t))];                            % unit step input aileron only 
+u_rudder =  [zeros(size(t)); 0 ones(1, size(t,2)-1)];                            % unit step input rudder only
+u_rudder_10 = [zeros(size(t)); 0, ones(1, 10/dt-1), zeros(1, size(t,2)-10/dt)];  % 10s-long unit step rudder 
 y_long = lsim(SS_ac_long,u_elevator,t);
 y_lat_aileron = lsim(SS_ac_lat,u_aileron,t);
 y_lat_rudder = lsim(SS_ac_lat,u_rudder,t);
