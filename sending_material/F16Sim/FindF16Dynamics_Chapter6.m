@@ -2,9 +2,9 @@
 %%%%%%%%%%%%%%%%%% CHAPTER 6 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all
-load('ABCD_full.mat')
-altitude = 10000; %input('Enter the altitude for the simulation (ft)  :  ');
-velocity = 900; %input('Enter the velocity for the simulation (ft/s):  ');
+load('ABCD_full.mat') %State space system for given flight conditions
+altitude = 10000;
+velocity = 900;
 s=tf ('s');
 
 
@@ -34,12 +34,11 @@ sys_ac_long = pck(A_ac_long, B_ac_long, C_ac_long, D_ac_long);
 SS_ac_lat = ss(A_ac_lat, B_ac_lat, C_ac_lat, D_ac_lat);
 sys_ac_lat = pck(A_ac_lat, B_ac_lat, C_ac_lat, D_ac_lat);
 
-long_poles_ac = spoles(sys_ac_long);
-lat_poles_ac = spoles(sys_ac_lat);
+long_poles_ac = spoles(sys_ac_long); % poles of longitudinal motion system
+lat_poles_ac = spoles(sys_ac_lat);   % poles of lateral motion system
 
 % figure(4); 
 % pzmap(SS_ac_long, 'r', SS_ac_lat, 'b');
-% 
 % title('All Poles\n Blue = lateral Red = longitudinal.');
 % sgrid;
 
@@ -66,13 +65,13 @@ T_half_dutch_roll = log(2)/(freq_dutch_roll * damp_dutch_roll);
 time_const_spiral = - 1 / poles_lat(1);
 time_const_ap_roll = - 1 / poles_lat(4);
 
-dt = 0.01;
-t = [0:dt:1000];
-u_elevator = [0 ones(1, size(t,2)-1)];
+dt = 0.01;       % time step
+t = [0:dt:1000]; % simulation time
+u_elevator = [0 ones(1, size(t,2)-1)];                                           % step input elevator
+u_aileron = [0 ones(1, size(t,2)-1); zeros(size(t))];                            % step input aileron only 
+u_rudder =  [zeros(size(t)); 0 ones(1, size(t,2)-1)];                            % step input rudder only
+u_rudder_10 = [zeros(size(t)); 0, ones(1, 10/dt-1), zeros(1, size(t,2)-10/dt)];  % 10s-long step rudder 
 y_long = lsim(SS_ac_long,u_elevator,t);
-u_aileron = [0 ones(1, size(t,2)-1); zeros(size(t))];
-u_rudder =  [zeros(size(t)); 0 ones(1, size(t,2)-1)];
-u_rudder_10 = [zeros(size(t)); 0, ones(1, 10/dt-1), zeros(1, size(t,2)-10/dt)];
 y_lat_aileron = lsim(SS_ac_lat,u_aileron,t);
 y_lat_rudder = lsim(SS_ac_lat,u_rudder,t);
 y_lat_rudder_10 = lsim(SS_ac_lat,u_rudder_10,t);

@@ -1,21 +1,8 @@
+ %%%%%%%%%%%%%%%%%% CHAPTER 5 %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%================================================
-%     Matlab Script File used to linearize the 
-%     non-linear F-16 model. The program will 
-%     Extract the longitudal and lateral 
-%     direction matrices.  These system matrices 
-%     will be used to create pole-zero mapping
-%     and the bode plots of each to each control
-%     input.
-% Author: Richard S. Russell
-% 
-%================================================
 clear;
-
 addpath obsmutoolsfornewermatlabversions -END % required for some new MATLAB versions
-
 global fi_flag_Simulink
-
 newline = sprintf('\n');
 
 %% Trim aircraft to desired altitude and velocity
@@ -27,15 +14,15 @@ xa4=6*0.3048;
 xa5=7*0.3048;
 xa6=15*0.3048;
 disp(sprintf('xa: %f', xa));
-altitude =15000 ; %input('Enter the altitude for the simulation (ft)  :  ');
-velocity = 500; %input('Enter the velocity for the simulation (ft/s):  ');
+altitude =15000;
+velocity = 500;
 
 %% Initial guess for trim
 %%
-thrust = 5000;          % thrust, lbs
-elevator = -0.09;       % elevator, degrees
+thrust = 5000;             % thrust, lbs
+elevator = -0.09;          % elevator, degrees
 alpha = 8.49;              % AOA, degrees
-rudder = -0.01;             % rudder angle, degrees
+rudder = -0.01;            % rudder angle, degrees
 aileron = 0.01;            % aileron, degrees
 
 %% Find trim for Hifi model at desired altitude and velocity
@@ -66,6 +53,7 @@ trim_state_lin = trim_state_lo; trim_thrust_lin = trim_thrust_lo; trim_control_l
 %%
 SS_hi = ss(A_hi,B_hi,C_hi,D_hi);
 SS_lo = ss(A_lo,B_lo,C_lo,D_lo);
+
 %%    CHAPTER 5 
 G = tf(SS_lo(19,2));
 s=tf ('s');
